@@ -1,0 +1,43 @@
+version: '3.7'
+
+services: 
+  registry:
+    image: registry:2.8.3
+    container_name: registry
+    hostname: registry
+    restart: always
+    ports:
+      - 5005:5005
+    volumes:
+      - ./registry:/var/lib/registry
+    environment:
+      - REGISTRY_HTTP_ADDR=0.0.0.0:5005
+
+  jenkins:
+    image: jenkins/jenkins:jdk17
+    container_name: jenkins
+    hostname: jenkins
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: root
+    environment:
+      - JAVA_OPTS="-Dhudsson.model.DownloadService.noSignatureCheck=true"
+      - DOCKER_OPTS="-H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock"
+      - DOCKER_HOST=unix:///var/run/docker.sock
+
+  nginx:
+    image: nginx:stable-perl
+    container_name: nginx
+    hostname: nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - jenkins
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - /etc/localtime:/etc/localtime

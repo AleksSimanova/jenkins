@@ -1,0 +1,19 @@
+---
+
+- view:
+    name: QA
+    view-type: list
+    description: |
+      QA projects
+    filter-executors: true
+    filter-queue: true
+    job-name:
+      - ui-tests
+      - api-autotests
+      - mobile-autotests
+      - runner-autotests
+    columns:
+      - status
+      - build-button
+      - job
+      - weather
