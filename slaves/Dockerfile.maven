@@ -1,9 +1,0 @@
-FROM jenkins/agent:jdk17
-
-USER root
-
-RUN mkdir /root/jenkins_agent
-WORKDIR /root/jenkins_agent
-
-RUN apt-get update -y \
-    && apt-get install maven -y
