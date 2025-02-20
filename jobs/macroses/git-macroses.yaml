@@ -34,7 +34,7 @@
     name: runner-autotests-repo
     scm:
       - git:
-          url: git@test.mail.ru/runner.git
+          url: git@github.com:AleksSimanova/jenkins.git
           credentials-id: jenkins
           branches:
             - FETCH_HEAD
