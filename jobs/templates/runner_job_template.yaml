@@ -5,7 +5,7 @@
     parameters:
       - string:
             name: 'REFSPEC'
-            default: master
+            default: main
             description: "<h3>runner  autotests job</h3>"
       - text:
             name: YAML_CONFIG
@@ -14,4 +14,4 @@
     pipeline-scm:
       scm:
         - runner-autotests-repo 
-      script-path: ./jenkins/ui_pipeline.groovy
+      script-path: ./runner.groovy
